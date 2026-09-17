@@ -1,15 +1,30 @@
+import PageSection from "@/components/PageSection";
+import Badge from "@/components/Badge";
+
+const SKILL_GROUPS = [
+  { label: "Backend", skills: ["Python", "Django", "PostgreSQL"] },
+  { label: "Frontend", skills: ["React", "Vue", "TypeScript", "Tailwind CSS"] },
+  { label: "Automation & Tools", skills: ["n8n", "Git"] },
+  { label: "Exploring", skills: ["Artificial Intelligence"] },
+];
+
 export default function Skills() {
-    return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-            <main
-                className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-                    My Skills
-                </h1>
-                <p>
-                    Categories: BE, FE, Infra/DevOps, Tools
-                </p>
-            </main>
-        </div>
-    );
+  return (
+    <PageSection eyebrow="Toolbox" title="My Skills">
+      <div className="flex flex-col gap-8">
+        {SKILL_GROUPS.map((group) => (
+          <div key={group.label} className="flex flex-col gap-3">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+              {group.label}
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <Badge key={skill}>{skill}</Badge>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </PageSection>
+  );
 }

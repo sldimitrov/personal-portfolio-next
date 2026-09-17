@@ -1,19 +1,24 @@
+import PageSection from "@/components/PageSection";
+import Card from "@/components/Card";
+
 export default function Projects() {
-    return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-            <main
-                className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-                    My Projects
-                </h1>
-                <div>
-                    <h2>Project 1</h2>
-                    <p>description</p>
-                    <p>tags</p>
-                    <p>live link + repo link</p>
-                </div>
-                <span>Think about using API for here.</span>
-            </main>
-        </div>
-    );
+  return (
+    <PageSection eyebrow="Work" title="My Projects">
+      <Card className="flex flex-col items-start gap-3">
+        <p className="text-zinc-700 dark:text-zinc-300">
+          I&apos;m putting together write-ups for the projects I&apos;ve
+          shipped. In the meantime, take a look at what I&apos;m building on
+          GitHub.
+        </p>
+        <a
+          href="https://github.com/sldimitrov"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-medium text-black underline underline-offset-4 dark:text-white"
+        >
+          github.com/sldimitrov →
+        </a>
+      </Card>
+    </PageSection>
+  );
 }

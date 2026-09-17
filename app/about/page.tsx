@@ -1,20 +1,56 @@
-
+import PageSection from "@/components/PageSection";
 
 export default function About() {
-    return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-            <main
-                className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-                    About Me
-                </h1>
-                <p>
-                    background, current, role, what drives me.
-                </p>
-                <p>
-                    photo
-                </p>
-            </main>
+  return (
+    <PageSection eyebrow="About" title="About Me">
+      <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-black text-2xl font-semibold text-white dark:bg-white dark:text-black">
+          SD
         </div>
-    );
+        <div>
+          <p className="text-lg font-medium text-black dark:text-white">
+            Slavi Dimitrov
+          </p>
+          <p className="text-zinc-500 dark:text-zinc-400">
+            Fullstack Developer · Sofia, Bulgaria
+          </p>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4 text-zinc-700 dark:text-zinc-300">
+        <p>
+          I&apos;m a fullstack developer with a strong frontend foundation and
+          growing backend expertise in Django. I like environments where the
+          problem shapes the stack - where solving something well means being
+          willing to learn a new tool mid-project rather than forcing an old
+          one to fit.
+        </p>
+        <p>
+          I&apos;ve worked across the stack on everything from startup MVPs to
+          production platforms: building interfaces in React and Vue,
+          automating workflows with n8n, and increasingly owning the backend
+          with Django and PostgreSQL. I care about writing code that&apos;s
+          actually maintainable, not just working - and about teams that
+          value initiative and clear communication over rigid process.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        <h2 className="text-lg font-semibold text-black dark:text-white">
+          Right now
+        </h2>
+        <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300">
+          <li>
+            🌱 Advancing in Django with PostgreSQL, deeper into the Python
+            ecosystem.
+          </li>
+          <li>
+            👀 Exploring Artificial Intelligence alongside web and systems
+            work.
+          </li>
+          <li>⚡ Fun fact - I love sports just as much as programming.</li>
+        </ul>
+      </div>
+    </PageSection>
+  );
 }
