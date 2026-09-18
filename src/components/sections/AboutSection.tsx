@@ -1,5 +1,24 @@
 import Section from "@/components/Section";
 import Photo from "@/components/Photo";
+import { SeedlingIcon, ExploreIcon, LightningIcon } from "@/components/icons/RightNowIcons";
+
+const RIGHT_NOW_ITEMS = [
+  {
+    icon: SeedlingIcon,
+    text: "Advancing in Django with PostgreSQL, deeper into the Python ecosystem.",
+    color: "text-green-600 dark:text-green-400",
+  },
+  {
+    icon: ExploreIcon,
+    text: "Exploring Artificial Intelligence alongside web and systems work.",
+    color: "text-blue-600 dark:text-blue-400",
+  },
+  {
+    icon: LightningIcon,
+    text: "Fun fact - I love sports just as much as programming.",
+    color: "text-yellow-500 dark:text-yellow-400",
+  },
+];
 
 export default function AboutSection() {
   return (
@@ -41,16 +60,25 @@ export default function AboutSection() {
           <h3 className="text-lg font-semibold text-black dark:text-white">
             Right now
           </h3>
-          <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300 animate-stagger">
-            <li>
-              🌱 Advancing in Django with PostgreSQL, deeper into the Python
-              ecosystem.
-            </li>
-            <li>
-              👀 Exploring Artificial Intelligence alongside web and systems
-              work.
-            </li>
-            <li>⚡ Fun fact - I love sports just as much as programming.</li>
+          <ul className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-300 animate-stagger">
+            {RIGHT_NOW_ITEMS.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <li
+                  key={index}
+                  className="flex items-start gap-3 group"
+                  style={{
+                    animation: `fadeInUp 0.6s ease-out backwards`,
+                    animationDelay: `${0.1 + index * 0.1}s`,
+                  }}
+                >
+                  <IconComponent className={`w-5 h-5 mt-0.5 flex-shrink-0 transition-transform group-hover:scale-110 group-hover:-rotate-12 ${item.color}`} />
+                  <span className="transition-colors group-hover:text-black dark:group-hover:text-white">
+                    {item.text}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
