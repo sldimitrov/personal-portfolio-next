@@ -1,5 +1,13 @@
 import PageSection from "@/components/PageSection";
 import Card from "@/components/Card";
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "Projects - Slavi Dimitrov",
+  description: "Explore the projects I've built across React, Vue, Django, and PostgreSQL.",
+  slug: "projects",
+  keywords: ["projects", "portfolio", "work", "case studies"],
+});
 
 export default function Projects() {
   return (

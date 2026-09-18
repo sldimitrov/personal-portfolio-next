@@ -1,5 +1,13 @@
 import PageSection from "@/components/PageSection";
 import Badge from "@/components/Badge";
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "Skills - Slavi Dimitrov",
+  description: "My technical skills in frontend, backend, and automation technologies.",
+  slug: "skills",
+  keywords: ["skills", "technologies", "tech stack", "tools"],
+});
 
 const SKILL_GROUPS = [
   { label: "Backend", skills: ["Python", "Django", "PostgreSQL"], color: "blue" as const },

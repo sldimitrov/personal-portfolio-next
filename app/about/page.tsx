@@ -1,5 +1,13 @@
 import PageSection from "@/components/PageSection";
 import Photo from '@/components/Photo'
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "About Slavi - Fullstack Developer",
+  description: "Learn about my journey from frontend to fullstack, my tech stack, and what I'm working on.",
+  slug: "about",
+  keywords: ["about", "experience", "skills", "career"],
+});
 
 export default function About() {
   return (

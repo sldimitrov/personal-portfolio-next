@@ -1,6 +1,14 @@
 import PageSection from "@/components/PageSection";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "Experience - Slavi Dimitrov",
+  description: "My work experience and education in software engineering and web development.",
+  slug: "experience",
+  keywords: ["experience", "work", "education", "career"],
+});
 
 const WORK = [
   {

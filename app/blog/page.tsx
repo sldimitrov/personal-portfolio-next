@@ -2,6 +2,14 @@ import Link from "next/link";
 import PageSection from "@/components/PageSection";
 import Card from "@/components/Card";
 import { getSortedPosts } from "@/data/posts";
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "Blog - Web Development & Fullstack",
+  description: "Articles on React, Django, PostgreSQL, and fullstack development practices.",
+  slug: "blog",
+  keywords: ["blog", "articles", "web development", "tutorial", "tech"],
+});
 
 export default function Blog() {
   const posts = getSortedPosts();

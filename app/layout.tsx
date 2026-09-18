@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { getPersonSchema } from "@/lib/schema";
+import { generateMetadata } from "@/lib/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,23 +17,40 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generateMetadata({
   title: "Slavi Dimitrov - Fullstack Developer",
   description:
-    "Personal portfolio of Slavi Dimitrov, a fullstack developer working across React, Vue and Django with a growing focus on backend engineering.",
-};
+    "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
+  keywords: ["fullstack", "developer", "sofia", "bulgaria", "web development"],
+});
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const schemaMarkup = getPersonSchema();
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-    <body className="flex min-h-full flex-col bg-white text-black dark:bg-black dark:text-white">
-      <Header />
-      <div className="flex flex-1 flex-col">{children}</div>
-      <Footer />
-    </body>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaMarkup),
+          }}
+        />
+      </head>
+      <body className="flex min-h-full flex-col bg-white text-black dark:bg-black dark:text-white">
+        <Header />
+        <div className="flex flex-1 flex-col">{children}</div>
+        <Footer />
+
+        {/* Vercel Analytics - Automatic tracking */}
+        <Script
+          strategy="afterInteractive"
+          src="https://cdn.vercel-analytics.com/v1/script.demo.js"
+        />
+      </body>
     </html>
   );
 }

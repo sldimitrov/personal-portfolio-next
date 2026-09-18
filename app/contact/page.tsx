@@ -1,5 +1,13 @@
 import PageSection from "@/components/PageSection";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import { generateMetadata } from "@/lib/metadata";
+
+export const metadata = generateMetadata({
+  title: "Contact - Slavi Dimitrov",
+  description: "Get in touch via email or LinkedIn. Let's connect and build something great together.",
+  slug: "contact",
+  keywords: ["contact", "email", "linkedin", "get in touch"],
+});
 
 const CONTACT_LINKS = [
   {
