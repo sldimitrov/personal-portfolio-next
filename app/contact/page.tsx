@@ -30,7 +30,7 @@ const CONTACT_LINKS = [
 export default function Contact() {
   return (
     <PageSection eyebrow="Get in touch" title="Let's connect.">
-      <p className="max-w-lg text-zinc-700 dark:text-zinc-300 animate-fade-in">
+      <p className="max-w-lg text-zinc-700 dark:text-zinc-300 animate-fade-in pb-8 sm:pb-12">
         The fastest way to reach me is email or LinkedIn — I check both
         regularly.
       </p>
