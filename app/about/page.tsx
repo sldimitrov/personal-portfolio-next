@@ -1,12 +1,13 @@
 import PageSection from "@/components/PageSection";
+import Photo from '@/components/Photo'
 
 export default function About() {
   return (
     <PageSection eyebrow="About" title="About Me">
       <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-black text-2xl font-semibold text-white dark:bg-white dark:text-black">
-          SD
-        </div>
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full overflow-hidden">
+          <Photo src="/images/IMG_8449.PNG" alt="Slavi Dimitrov" />
+          </div>
         <div>
           <p className="text-lg font-medium text-black dark:text-white">
             Slavi Dimitrov
@@ -17,7 +18,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 text-zinc-700 dark:text-zinc-300">
+      <div className="flex flex-col gap-4 text-zinc-700 dark:text-zinc-300 animate-fade-in">
         <p>
           I&apos;m a fullstack developer with a strong frontend foundation and
           growing backend expertise in Django. I like environments where the
@@ -39,7 +40,7 @@ export default function About() {
         <h2 className="text-lg font-semibold text-black dark:text-white">
           Right now
         </h2>
-        <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300">
+        <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-300 animate-stagger">
           <li>
             🌱 Advancing in Django with PostgreSQL, deeper into the Python
             ecosystem.

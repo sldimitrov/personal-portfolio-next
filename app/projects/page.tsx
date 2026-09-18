@@ -14,9 +14,9 @@ export default function Projects() {
           href="https://github.com/sldimitrov"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm font-medium text-black underline underline-offset-4 dark:text-white"
+          className="text-sm font-medium text-black dark:text-white hover-underline group"
         >
-          github.com/sldimitrov →
+          <span className="group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">github.com/sldimitrov</span> <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
         </a>
       </Card>
     </PageSection>

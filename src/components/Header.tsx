@@ -36,7 +36,7 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`text-sm transition-colors ${
+                className={`text-sm transition-colors hover-underline ${
                   isActive
                     ? "font-medium text-black dark:text-white"
                     : "text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white"

@@ -46,7 +46,7 @@ export default function Experience() {
         <h2 className="text-lg font-semibold text-black dark:text-white">
           Work
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 animate-stagger">
           {WORK.map((job) => (
             <Card key={job.company} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
@@ -65,9 +65,9 @@ export default function Experience() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {job.skills.map((skill) => (
-                  <Badge key={skill}>{skill}</Badge>
+                  <Badge key={skill} variant="purple">{skill}</Badge>
                 ))}
-                <Badge>+{job.extraSkills} skills</Badge>
+                <Badge variant="purple">+{job.extraSkills} skills</Badge>
               </div>
             </Card>
           ))}
@@ -78,7 +78,7 @@ export default function Experience() {
         <h2 className="text-lg font-semibold text-black dark:text-white">
           Education
         </h2>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 animate-stagger">
           {EDUCATION.map((edu) => (
             <Card key={edu.school} className="flex flex-col gap-1">
               <p className="font-medium text-black dark:text-white">
