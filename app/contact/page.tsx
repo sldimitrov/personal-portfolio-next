@@ -1,4 +1,4 @@
-import Section from "@/components/Section";
+import PageSection from "@/components/PageSection";
 import ContactForm from "@/components/ContactForm";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
 
@@ -20,9 +20,9 @@ const CONTACT_LINKS = [
   },
 ];
 
-export default function ContactSection() {
+export default function Contact() {
   return (
-    <Section id="contact" eyebrow="Get in touch" title="Let's connect.">
+    <PageSection eyebrow="Get in touch" title="Let's connect.">
       <div className="space-y-12">
         {/* Quick Contact Options */}
         <div className="space-y-4">
@@ -61,6 +61,6 @@ export default function ContactSection() {
           <ContactForm />
         </div>
       </div>
-    </Section>
+    </PageSection>
   );
 }

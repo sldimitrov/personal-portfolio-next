@@ -6,8 +6,8 @@ export default function AboutSection() {
     <Section id="about" eyebrow="About" title="About Me">
       <div className="flex flex-col gap-12">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full overflow-hidden">
-            <Photo src="/images/IMG_8449.PNG" alt="Slavi Dimitrov" />
+          <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full overflow-hidden ring-2 ring-blue-300 dark:ring-blue-900">
+            <Photo src="/images/portrait.webp" alt="Slavi Dimitrov" />
           </div>
           <div>
             <p className="text-lg font-medium text-black dark:text-white">

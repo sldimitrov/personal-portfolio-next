@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -7,6 +8,16 @@ export default function HeroSection() {
       aria-labelledby="home-title"
       className="flex min-h-[calc(100svh-4rem)] scroll-mt-16 flex-col items-center justify-center bg-zinc-50 px-6 py-24 text-center dark:bg-black"
     >
+      <div className="mb-8 animate-fade-in">
+        <Image
+          src="/images/portrait.webp"
+          alt="Slavi Dimitrov"
+          width={200}
+          height={240}
+          className="mx-auto h-auto w-40 rounded-lg shadow-lg ring-2 ring-blue-300 dark:ring-blue-900"
+          priority
+        />
+      </div>
       <p className="text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400 animate-fade-in">
         Fullstack Developer
       </p>
