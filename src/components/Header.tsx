@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -17,6 +17,19 @@ const NAV_LINKS = [
 export default function Header() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Lock/unlock scroll when menu opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
@@ -73,26 +86,37 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <nav className="flex flex-col gap-1 border-t border-zinc-200 bg-white px-6 py-4 md:hidden dark:border-zinc-800 dark:bg-black">
-          {NAV_LINKS.map(({ href, label }) => {
-            const isActive = pathname === href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setIsOpen(false)}
-                className={`rounded-md px-2 py-2 text-sm transition-colors ${
-                  isActive
-                    ? "font-medium text-black dark:text-white"
-                    : "text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white"
-                }`}
-              >
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Menu */}
+          <nav className="fixed top-16 left-0 right-0 z-50 flex flex-col gap-1 border-b border-zinc-200 bg-white max-h-[calc(100vh-64px)] overflow-y-auto md:hidden dark:border-zinc-800 dark:bg-black">
+            {NAV_LINKS.map(({ href, label }) => {
+              const isActive = pathname === href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setIsOpen(false)}
+                  className={`px-6 py-3 text-sm transition-colors ${
+                    isActive
+                      ? "font-medium text-black bg-zinc-50 dark:text-white dark:bg-zinc-900"
+                      : "text-zinc-600 hover:text-black hover:bg-zinc-50 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+        </>
       )}
     </header>
   );
