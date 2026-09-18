@@ -97,7 +97,7 @@ export default function Header() {
           />
 
           {/* Menu */}
-          <nav className="fixed top-16 left-0 right-0 z-50 flex flex-col gap-1 border-b border-zinc-200 bg-white max-h-[calc(100vh-64px)] overflow-y-auto md:hidden dark:border-zinc-800 dark:bg-black">
+          <nav className="fixed top-16 left-0 right-0 bottom-0 z-50 flex flex-col gap-1 border-b border-zinc-200 bg-white overflow-y-auto md:hidden dark:border-zinc-800 dark:bg-black">
             {NAV_LINKS.map(({ href, label }) => {
               const isActive = pathname === href;
               return (
