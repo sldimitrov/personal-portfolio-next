@@ -1,19 +1,10 @@
-import Link from "next/link";
-import PageSection from "@/components/PageSection";
+import Section from "@/components/Section";
 import Card from "@/components/Card";
-import { generateMetadata } from "@/lib/metadata";
 import { PROJECTS } from "@/data/projects";
 
-export const metadata = generateMetadata({
-  title: "Projects - Slavi Dimitrov",
-  description: "Explore the projects I've built across React, Vue, Django, and PostgreSQL.",
-  slug: "projects",
-  keywords: ["projects", "portfolio", "work", "case studies"],
-});
-
-export default function Projects() {
+export default function ProjectsSection() {
   return (
-    <PageSection eyebrow="Work" title="My Projects">
+    <Section id="projects" eyebrow="Work" title="My Projects">
       <div className="flex flex-col gap-6">
         {PROJECTS.map((project) => (
           <Card key={project.id} className="flex flex-col gap-4">
@@ -83,6 +74,6 @@ export default function Projects() {
           <span>→</span>
         </a>
       </Card>
-    </PageSection>
+    </Section>
   );
 }
