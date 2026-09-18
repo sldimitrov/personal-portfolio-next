@@ -1,5 +1,6 @@
 import Link from "next/link";
 import StarField from "@/components/StarField";
+import ParticleNetwork from "@/components/ParticleNetwork";
 
 export default function Home() {
   return (
@@ -7,6 +8,9 @@ export default function Home() {
       {/* Background gradient with grid */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 via-blue-50/20 to-zinc-50 dark:from-black dark:via-blue-950/10 dark:to-black" />
+
+        {/* 3D Particle Network */}
+        <ParticleNetwork />
 
         {/* Shooting stars - dark mode only */}
         <StarField />
