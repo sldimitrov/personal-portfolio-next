@@ -17,12 +17,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = generateMetadata({
-  title: "Slavi Dimitrov - Fullstack Developer",
-  description:
-    "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
-  keywords: ["fullstack", "developer", "sofia", "bulgaria", "web development"],
-});
+export const metadata: Metadata = {
+  ...generateMetadata({
+    title: "Slavi Dimitrov - Fullstack Developer",
+    description:
+      "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
+    keywords: ["fullstack", "developer", "sofia", "bulgaria", "web development"],
+  }),
+  metadataBase: new URL("https://slavidimitrov.dev"),
+};
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   const schemaMarkup = getPersonSchema();

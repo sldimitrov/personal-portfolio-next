@@ -23,7 +23,8 @@
       "@/styles/*": ["styles/*"],
       "@/components/*": ["components/*"],
       "@/data/*": ["data/*"],
-      "@/assets/*": ["assets/*"]
+      "@/assets/*": ["assets/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "include": [

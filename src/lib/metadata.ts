@@ -37,7 +37,9 @@ export function generateMetadata(props: PageMetadataProps): Metadata {
       "next.js",
       ...keywords,
     ],
-    canonical: url,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title: slug ? `${title} | Slavi Dimitrov` : title,
       description,
