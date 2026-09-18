@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
     keywords: ["fullstack", "developer", "sofia", "bulgaria", "web development"],
   }),
-  metadataBase: new URL("https://slavidimitrov.dev"),
+  metadataBase: new URL("https://slavidimitrov.com"),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

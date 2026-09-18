@@ -3,10 +3,10 @@ export function getPersonSchema() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Slavi Dimitrov",
-    url: "https://slavidimitrov.dev",
+    url: "https://slavidimitrov.com",
     jobTitle: "Fullstack Developer",
     email: "slavidimitrov54@gmail.com",
-    image: "https://slavidimitrov.dev/images/IMG_8449.PNG",
+    image: "https://slavidimitrov.com/images/IMG_8449.PNG",
     location: {
       "@type": "Place",
       name: "Sofia, Bulgaria",
@@ -48,7 +48,7 @@ export function getBreadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `https://slavidimitrov.dev${item.url}`,
+      item: `https://slavidimitrov.com${item.url}`,
     })),
   };
 }
@@ -68,12 +68,12 @@ export function getBlogPostSchema(post: {
     author: {
       "@type": "Person",
       name: "Slavi Dimitrov",
-      url: "https://slavidimitrov.dev",
+      url: "https://slavidimitrov.com",
     },
-    url: `https://slavidimitrov.dev/blog/${post.slug}`,
+    url: `https://slavidimitrov.com/blog/${post.slug}`,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://slavidimitrov.dev/blog/${post.slug}`,
+      "@id": `https://slavidimitrov.com/blog/${post.slug}`,
     },
   };
 }

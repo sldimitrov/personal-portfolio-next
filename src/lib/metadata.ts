@@ -21,7 +21,7 @@ export function generateMetadata(props: PageMetadataProps): Metadata {
     publishedDate,
   } = props;
 
-  const baseUrl = "https://slavidimitrov.dev";
+  const baseUrl = "https://slavidimitrov.com";
   const url = slug ? `${baseUrl}/${slug}` : baseUrl;
 
   return {
