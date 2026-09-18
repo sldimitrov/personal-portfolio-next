@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getSortedPosts } from "@/data/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://slavidimitrov.dev";
+  const baseUrl = "https://slavidimitrov.com";
 
   const staticPages: MetadataRoute.Sitemap = [
     {
