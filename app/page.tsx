@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StarField from "@/components/StarField";
 
 export default function Home() {
   return (
@@ -6,6 +7,9 @@ export default function Home() {
       {/* Background gradient with grid */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-50 via-blue-50/20 to-zinc-50 dark:from-black dark:via-blue-950/10 dark:to-black" />
+
+        {/* Shooting stars - dark mode only */}
+        <StarField />
 
         {/* Animated gradient orbs */}
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-blue-300/20 to-purple-300/20 blur-3xl dark:from-blue-900/20 dark:to-purple-900/20" />
