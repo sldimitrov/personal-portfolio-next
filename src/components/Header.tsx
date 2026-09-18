@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+      <div className="relative mx-auto flex h-16 max-w-5xl items-center justify-between px-6 z-50">
         <Link
           href="/"
           className="text-lg font-semibold tracking-tight text-black dark:text-white"
@@ -91,9 +91,10 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
+            style={{ pointerEvents: "auto" }}
           />
 
           {/* Menu */}
