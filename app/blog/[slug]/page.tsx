@@ -2,13 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageSection from "@/components/PageSection";
-import { POSTS, getPostBySlug } from "@/data/posts";
+import { getPostBySlug } from "@/lib/supabase";
 
 type Params = Promise<{ slug: string }>;
-
-export function generateStaticParams() {
-  return POSTS.map((post) => ({ slug: post.slug }));
-}
 
 export async function generateMetadata({
   params,
@@ -16,7 +12,7 @@ export async function generateMetadata({
   params: Params;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Post not found" };
@@ -24,13 +20,13 @@ export async function generateMetadata({
 
   return {
     title: `${post.title} — Slavi Dimitrov`,
-    description: post.excerpt,
+    description: post.excerpt || post.content.substring(0, 160),
   };
 }
 
 export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -44,17 +40,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       >
         ← Back to blog
       </Link>
-      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-        {new Date(post.date).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </p>
-      <div className="flex flex-col gap-4 text-zinc-700 dark:text-zinc-300">
-        {post.content.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+      {post.date && (
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          {new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      )}
+      <div className="prose prose-invert max-w-none text-zinc-700 dark:text-zinc-300">
+        <p>{post.content}</p>
       </div>
     </PageSection>
   );
