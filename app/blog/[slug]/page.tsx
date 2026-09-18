@@ -36,9 +36,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     <PageSection eyebrow="Writing" title={post.title}>
       <Link
         href="/blog"
-        className="text-sm font-medium text-zinc-500 transition-colors hover:text-black dark:text-zinc-400 dark:hover:text-white"
+        className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-lg font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all hover:text-black dark:hover:text-white"
       >
-        ← Back to blog
+        <span>←</span>
+        <span>Back to blog</span>
       </Link>
       {post.date && (
         <p className="text-sm text-zinc-500 dark:text-zinc-400">

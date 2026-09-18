@@ -35,8 +35,9 @@ export default async function Blog() {
               <p className="text-zinc-700 dark:text-zinc-300">
                 {post.excerpt}
               </p>
-              <span className="text-sm font-medium text-black dark:text-white inline-block group-hover:translate-x-1 transition-transform">
-                Read more →
+              <span className="inline-flex items-center gap-2 mt-3 px-3 py-2 rounded-lg font-medium text-black dark:text-white bg-zinc-100 dark:bg-zinc-900 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800 transition-all group-hover:translate-x-1">
+                <span>Read more</span>
+                <span>→</span>
               </span>
             </Card>
           </Link>
