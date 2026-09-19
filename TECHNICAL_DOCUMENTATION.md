@@ -94,24 +94,24 @@ This is a modern, performant personal portfolio website built with Next.js 15 an
 ## Feature Set
 
 ### Core Features
-✅ Responsive design (mobile, tablet, desktop)
-✅ Dark/light theme toggle with system preference detection
-✅ Smooth section navigation with hash routing
-✅ Contact form with email submission
-✅ Animated profile portrait (WebP format for performance)
-✅ Favicon (32×32 ICO and 180×180 PNG for iOS)
-✅ Color-coded skill badges with hover effects
-✅ Dynamic list animations with staggered entrance
+- Responsive design (mobile, tablet, desktop)
+- Dark/light theme toggle with system preference detection
+- Smooth section navigation with hash routing
+- Contact form with email submission
+- Animated profile portrait (WebP format for performance)
+- Favicon (32×32 ICO and 180×180 PNG for iOS)
+- Color-coded skill badges with hover effects
+- Dynamic list animations with staggered entrance
 
 ### Advanced Features
-✅ SEO optimized meta tags and structured data (JSON-LD)
-✅ Open Graph tags for social media sharing
-✅ Canonical URLs to prevent duplicate content issues
-✅ Sitemap generation for search engines
-✅ Analytics integration for user tracking
-✅ Performance monitoring with Vercel Analytics
-✅ Blog platform with rich content support
-✅ Real-time form validation and error handling
+- SEO optimized meta tags and structured data (JSON-LD)
+- Open Graph tags for social media sharing
+- Canonical URLs to prevent duplicate content issues
+- Sitemap generation for search engines
+- Analytics integration for user tracking
+- Performance monitoring with Vercel Analytics
+- Blog platform with rich content support
+- Real-time form validation and error handling
 
 ---
 
