@@ -27,7 +27,7 @@ export default function Contact() {
         {/* Quick Contact Options */}
         <div className="space-y-4">
           <p className="text-body animate-fade-in">
-            The fastest way to reach me is email or LinkedIn — I check both
+            The fastest way to reach me is email or LinkedIn
             regularly.
           </p>
           <div className="flex flex-wrap gap-8 animate-stagger">

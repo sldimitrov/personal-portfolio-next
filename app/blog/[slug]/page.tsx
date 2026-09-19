@@ -19,7 +19,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} — Slavi Dimitrov`,
+    title: `${post.title} - Slavi Dimitrov`,
     description: post.excerpt || post.content.substring(0, 160),
   };
 }
