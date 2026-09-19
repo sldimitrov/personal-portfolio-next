@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "/#experience", label: "Experience", section: "experience" },
   { href: "/#skills", label: "Skills", section: "skills" },
   { href: "/#projects", label: "Projects", section: "projects" },
-  { href: "/blog", label: "Blog", section: null },
+  { href: "/blog", label: "Blog", section: "blog" },
   { href: "/#contact", label: "Contact", section: "contact" },
 ];
 
@@ -21,10 +21,10 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+  // Hash links follow the scroll-spy on "/"; page links (Blog) also match their own route
   const isLinkActive = (link: (typeof NAV_LINKS)[number]) =>
-    link.section
-      ? pathname === "/" && activeSection === link.section
-      : pathname.startsWith(link.href);
+    (pathname === "/" && activeSection === link.section) ||
+    (!link.href.includes("#") && pathname.startsWith(link.href));
 
   // Scroll-spy: highlight the section crossing a line ~40% down the viewport
   useEffect(() => {

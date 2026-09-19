@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import ResumeLink from "@/components/ResumeLink";
 
 export default function HeroSection() {
   return (
@@ -44,6 +45,7 @@ export default function HeroSection() {
         >
           Get in touch
         </Link>
+        <ResumeLink className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-zinc-600 transition-all hover:text-black hover:scale-105 dark:text-zinc-400 dark:hover:text-white" />
       </div>
     </section>
   );

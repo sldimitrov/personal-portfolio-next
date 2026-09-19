@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { getSortedPosts } from "@/data/posts";
+import { PROJECTS } from "@/data/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://slavidimitrov.com";
@@ -26,5 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(post.date),
   }));
 
-  return [...staticPages, ...blogPosts];
+  const caseStudies = PROJECTS.filter((project) => project.caseStudy).map(
+    (project) => ({
+      url: `${baseUrl}/projects/${project.id}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      lastModified: new Date(),
+    })
+  );
+
+  return [...staticPages, ...caseStudies, ...blogPosts];
 }

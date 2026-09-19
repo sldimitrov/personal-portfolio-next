@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Section from "@/components/Section";
 import Card from "@/components/Card";
 import { PROJECTS } from "@/data/projects";
@@ -32,7 +33,16 @@ export default function ProjectsSection() {
               ))}
             </div>
 
-            <div className="flex gap-3 pt-2">
+            <div className="flex flex-wrap gap-3 pt-2">
+              {project.caseStudy && (
+                <Link
+                  href={`/projects/${project.id}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                >
+                  <span>Read case study</span>
+                  <span>→</span>
+                </Link>
+              )}
               {project.link && (
                 <a
                   href={project.link}
