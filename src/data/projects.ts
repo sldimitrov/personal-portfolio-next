@@ -86,58 +86,6 @@ export const PROJECTS: Project[] = [
   });
 }`,
         },
-        {
-          title: "One Postgres view, one query",
-          description:
-            "The service layer reads from feed_posts_shared, a view that joins posts, profiles, likes and shares. A profile page reuses the same view and only changes the filter: a user's own posts plus the posts they shared.",
-          language: "ts",
-          code: `static async list(offset = 0, limit = 5): Promise<Post[]> {
-  const { data, error } = await supabase
-    .from('feed_posts_shared') // view: posts + shares + like counts
-    .select('*')
-    .order('created_at', { ascending: false })
-    .range(offset, offset + limit - 1); // inclusive range
-
-  if (error) throw new Error(error.message);
-  return data as Post[];
-}
-
-static async listByUser(user_id: string): Promise<Post[]> {
-  const { data, error } = await supabase
-    .from('feed_posts_shared')
-    .select('*')
-    .or(\`and(user_id.eq.\${user_id},shared_by_id.is.null),shared_by_id.eq.\${user_id}\`)
-    .order('created_at', { ascending: false });
-
-  if (error) throw new Error(error.message);
-  return data as Post[];
-}`,
-        },
-        {
-          title: "A small cooldown hook",
-          description:
-            "Comments and shares are throttled per post with a reusable hook. It is client-side only for now - state is lost on reload - which is why the learnings call out moving this into the database.",
-          language: "ts",
-          code: `export const useCooldown = (cooldownMs: number = 60_000) => {
-  const [lastTimes, setLastTimes] = useState<Record<string, number>>({});
-
-  const isOnCooldown = (id: string | number) => {
-    const last = lastTimes[id] || 0;
-    return Date.now() - last < cooldownMs;
-  };
-
-  const getRemaining = (id: string | number) => {
-    const last = lastTimes[id] || 0;
-    return Math.ceil((cooldownMs - (Date.now() - last)) / 1000);
-  };
-
-  const trigger = (id: string | number) => {
-    setLastTimes((prev) => ({ ...prev, [id]: Date.now() }));
-  };
-
-  return { isOnCooldown, getRemaining, trigger };
-};`,
-        },
       ],
     },
   },

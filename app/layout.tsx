@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -50,12 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer />
-
-        {/* Vercel Analytics - Automatic tracking */}
-        <Script
-          strategy="afterInteractive"
-          src="https://cdn.vercel-analytics.com/v1/script.demo.js"
-        />
+        <Analytics />
       </body>
     </html>
   );
