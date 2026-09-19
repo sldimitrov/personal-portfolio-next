@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 import { getPersonSchema } from "@/lib/schema";
 import { generateMetadata } from "@/lib/metadata";
 
@@ -33,7 +34,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
@@ -47,6 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="flex min-h-full flex-col bg-white text-black dark:bg-black dark:text-white">
+        <ScrollToTop />
         <Header />
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer />
