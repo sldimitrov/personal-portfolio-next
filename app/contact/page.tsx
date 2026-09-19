@@ -26,7 +26,7 @@ export default function Contact() {
       <div className="space-y-12">
         {/* Quick Contact Options */}
         <div className="space-y-4">
-          <p className="text-zinc-700 dark:text-zinc-300 animate-fade-in">
+          <p className="text-body animate-fade-in">
             The fastest way to reach me is email or LinkedIn — I check both
             regularly.
           </p>
@@ -41,10 +41,10 @@ export default function Contact() {
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   className="group flex flex-col items-center gap-3 animate-hover-scale"
                 >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-zinc-200 text-black transition-all group-hover:border-black group-hover:bg-black group-hover:text-white dark:border-zinc-800 dark:text-white dark:group-hover:border-white dark:group-hover:bg-white dark:group-hover:text-black">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line-strong text-fg transition-all group-hover:border-navy-600 group-hover:bg-navy-600 group-hover:text-white">
                     <Icon width={24} height={24} />
                   </span>
-                  <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                  <span className="text-sm font-medium text-muted">
                     {label}
                   </span>
                 </a>
@@ -55,7 +55,7 @@ export default function Contact() {
 
         {/* Contact Form */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-black dark:text-white">
+          <h2 className="text-lg font-semibold text-fg">
             Or send me a message
           </h2>
           <ContactForm />

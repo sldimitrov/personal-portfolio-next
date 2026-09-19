@@ -19,9 +19,9 @@ export default async function Blog() {
       <div className="flex flex-col gap-4 animate-stagger">
         {posts.map((post) => (
           <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-            <Card className="flex flex-col gap-2 transition-all hover:border-blue-400 dark:hover:border-blue-500">
+            <Card className="flex flex-col gap-2 transition-all hover:border-navy-500">
               {post.date && (
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                <p className="text-sm text-muted">
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -29,13 +29,13 @@ export default async function Blog() {
                   })}
                 </p>
               )}
-              <p className="font-medium text-black dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <p className="font-medium text-fg group-hover:text-navy-600 transition-colors">
                 {post.title}
               </p>
-              <p className="text-zinc-700 dark:text-zinc-300">
+              <p className="text-body">
                 {post.excerpt}
               </p>
-              <span className="inline-flex items-center gap-2 mt-3 px-3 py-2 rounded-lg font-medium text-black dark:text-white bg-zinc-100 dark:bg-zinc-900 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800 transition-all group-hover:translate-x-1">
+              <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-navy-600 transition-all group-hover:translate-x-1">
                 <span>Read more</span>
                 <span>→</span>
               </span>

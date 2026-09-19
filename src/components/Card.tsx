@@ -9,7 +9,7 @@ export default function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-zinc-200 bg-white p-6 animate-hover-scale shadow-sm transition-shadow hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950 ${className}`}
+      className={`rounded-2xl border border-line bg-surface p-6 shadow-sm backdrop-blur-sm transition-all hover:shadow-md ${className}`}
     >
       {children}
     </div>

@@ -1,23 +1,96 @@
 @import "tailwindcss";
 /* @import "../src/styles/animations.css"; */
 
+/* Light-only theme (white + tech blue). `dark:` utilities stay inert unless a
+   `.dark` class is ever added to <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme static {
+  --color-navy-950: #030d26;
+  --color-navy-900: #071a4a;
+  --color-navy-800: #0b2a6f;
+  --color-navy-700: #0f3d9a;
+  --color-navy-600: #1553c7;
+  --color-navy-500: #2f73e6;
+  --color-navy-400: #5e97f0;
+  --color-navy-300: #9ec1f7;
+  --color-navy-200: #cfe0fb;
+  --color-navy-100: #e7f0fe;
+  --color-navy-50: #f5f9ff;
+
+  --color-aqua-400: #4fcfd8;
+  --color-aqua-300: #8fe0e6;
+  --color-aqua-200: #bdeff2;
+  --color-aqua-100: #e3f8f9;
+}
+
+/* Semantic tokens. Sections switch palette by adding `.tone-blue`. */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #071a4a;
+
+  --fg: #071a4a;
+  --fg-body: #3b4a6b;
+  --fg-muted: #64748f;
+  --surface: #ffffff;
+  --surface-hover: #f5f9ff;
+  --line: #dbe6f6;
+  --line-strong: #b4c9ec;
+  --accent: #1553c7;
+
+  --btn-bg: #1553c7;
+  --btn-bg-hover: #0f3d9a;
+  --btn-fg: #ffffff;
+  --btn-shadow: rgb(21 83 199 / 0.45);
+
+  --chip-bg: #e7f0fe;
+  --chip-fg: #0f3d9a;
+  --chip-line: #cfe0fb;
+  --chip-accent-bg: #e3f8f9;
+  --chip-accent-fg: #0b2a6f;
+  --chip-accent-line: #8fe0e6;
+
+  --grid-color: rgb(21 83 199 / 0.07);
+  color-scheme: light;
+}
+
+.tone-blue {
+  --fg: #ffffff;
+  --fg-body: #cfe0fb;
+  --fg-muted: #9ec1f7;
+  --surface: rgb(255 255 255 / 0.06);
+  --surface-hover: rgb(255 255 255 / 0.1);
+  --line: rgb(255 255 255 / 0.14);
+  --line-strong: rgb(255 255 255 / 0.38);
+  --accent: #8fe0e6;
+
+  --btn-bg: #ffffff;
+  --btn-bg-hover: #e7f0fe;
+  --btn-fg: #071a4a;
+  --btn-shadow: rgb(0 0 0 / 0.35);
+
+  --chip-bg: rgb(255 255 255 / 0.1);
+  --chip-fg: #e7f0fe;
+  --chip-line: rgb(255 255 255 / 0.22);
+  --chip-accent-bg: rgb(143 224 230 / 0.14);
+  --chip-accent-fg: #bdeff2;
+  --chip-accent-line: rgb(143 224 230 / 0.42);
+
+  --grid-color: rgb(255 255 255 / 0.06);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-fg: var(--fg);
+  --color-body: var(--fg-body);
+  --color-muted: var(--fg-muted);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html {
@@ -32,6 +105,115 @@ html {
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: var(--fg-body);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--color-navy-200);
+  color: var(--color-navy-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-navy-900) 0%,
+    var(--color-navy-800) 55%,
+    var(--color-navy-700) 100%
+  );
+}
+
+.bg-footer-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--color-navy-900) 0%,
+    var(--color-navy-950) 100%
+  );
+}
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--outline-color, var(--color-navy-200));
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-primary {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    box-shadow: 0 10px 24px -10px var(--btn-shadow);
+  }
+
+  .btn-primary:hover {
+    background: var(--btn-bg-hover);
+  }
+
+  .btn-outline {
+    border: 1px solid var(--line-strong);
+    color: var(--fg);
+  }
+
+  .btn-outline:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+  }
+
+  .btn-ghost {
+    color: var(--fg-muted);
+  }
+
+  .btn-ghost:hover {
+    color: var(--fg);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid var(--chip-line);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .chip-accent {
+    border-color: var(--chip-accent-line);
+    background: var(--chip-accent-bg);
+    color: var(--chip-accent-fg);
+  }
 }

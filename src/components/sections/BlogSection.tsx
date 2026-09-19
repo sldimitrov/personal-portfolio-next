@@ -19,31 +19,31 @@ export default async function BlogSection() {
   const posts = await getLatestPosts();
 
   return (
-    <Section id="blog" eyebrow="Writing" title="Latest from the blog">
-      <div className="flex flex-col gap-8">
+    <Section id="blog" eyebrow="Writing" title="Latest from the blog" tone="blue">
+      <div className="flex flex-col gap-10">
         {posts.length > 0 ? (
-          <div className="flex flex-col gap-4 animate-stagger">
+          <div className="grid gap-5 md:grid-cols-3">
             {posts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group"
+                className="group flex"
               >
-                <Card className="flex flex-col gap-2 transition-all hover:border-blue-400 dark:hover:border-blue-500">
+                <Card className="flex w-full flex-col gap-3 group-hover:-translate-y-1 group-hover:border-accent">
                   {post.date && (
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted">
                       {new Date(post.date).toLocaleDateString("en-US", {
                         year: "numeric",
-                        month: "long",
+                        month: "short",
                         day: "numeric",
                       })}
                     </p>
                   )}
-                  <p className="font-medium text-black transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+                  <p className="font-semibold leading-snug text-fg transition-colors group-hover:text-accent">
                     {post.title}
                   </p>
                   {post.excerpt && (
-                    <p className="line-clamp-2 text-zinc-700 dark:text-zinc-300">
+                    <p className="line-clamp-3 text-sm text-body">
                       {post.excerpt}
                     </p>
                   )}
@@ -52,17 +52,14 @@ export default async function BlogSection() {
             ))}
           </div>
         ) : (
-          <p className="text-zinc-600 dark:text-zinc-400">
+          <p className="text-body">
             Posts are on their way - check the blog for the latest.
           </p>
         )}
 
-        <Link
-          href="/blog"
-          className="inline-flex w-fit items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 font-medium text-black transition-colors hover:bg-white dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900"
-        >
+        <Link href="/blog" className="btn btn-outline w-fit">
           <span>View all posts</span>
-          <span>→</span>
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </Section>
