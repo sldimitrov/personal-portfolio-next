@@ -43,8 +43,7 @@ export default function ContactSection() {
       <div className="grid gap-12 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col gap-8">
           <p className="max-w-md text-lg text-body">
-            The fastest way to reach me is email or LinkedIn — I check both
-            regularly.
+            The fastest way to reach me is email or LinkedIn.
           </p>
           <div className="flex flex-wrap gap-6">
             {CONTACT_LINKS.map(({ label, href, Icon, download }) => {
