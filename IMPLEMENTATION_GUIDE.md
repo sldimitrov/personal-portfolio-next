@@ -163,7 +163,7 @@ export function getPersonSchema() {
     image: "https://slavidimitrov.dev/images/slavi-og.jpg",
     location: {
       "@type": "Place",
-      name: "Sofia, Bulgaria",
+      name: "Aytos, Bulgaria",
     },
     sameAs: [
       "https://github.com/sldimitrov",
@@ -411,7 +411,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 // ✅ Good
 <Image
   src="/images/slavi-og.jpg"
-  alt="Slavi Dimitrov, fullstack developer from Sofia"
+  alt="Slavi Dimitrov, fullstack developer from Aytos"
   width={1200}
   height={630}
 />

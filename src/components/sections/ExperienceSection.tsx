@@ -1,6 +1,7 @@
 import Section from "@/components/Section";
 import Card from "@/components/Card";
 import Badge from "@/components/Badge";
+import ResumeLink from "@/components/ResumeLink";
 
 const WORK = [
   {
@@ -8,8 +9,8 @@ const WORK = [
     company: "Waracle",
     type: "Full-time",
     period: "Aug 2025 – Present · 1 yr 2 mos",
-    location: "Sofia, Sofia City, Bulgaria · Hybrid",
-    skills: ["React.js", "Django"],
+    location: "Aytos, Sofia City, Bulgaria · Hybrid",
+    skills: ["React.js", "Django", "React Native"],
     extraSkills: 3,
   },
   {
@@ -100,6 +101,10 @@ export default function ExperienceSection() {
             ))}
           </div>
         </div>
+
+        <ResumeLink className="inline-flex w-fit items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 font-medium text-black transition-colors hover:bg-white dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900">
+          Download full CV (PDF)
+        </ResumeLink>
       </div>
     </Section>
   );

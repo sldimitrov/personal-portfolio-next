@@ -33,7 +33,7 @@ export default function AboutSection() {
               Slavi Dimitrov
             </p>
             <p className="text-zinc-500 dark:text-zinc-400">
-              Fullstack Developer · Sofia, Bulgaria
+              Fullstack Developer · Aytos, Bulgaria
             </p>
           </div>
         </div>

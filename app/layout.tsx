@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: "Slavi Dimitrov - Fullstack Developer",
     description:
       "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
-    keywords: ["fullstack", "developer", "sofia", "bulgaria", "web development"],
+    keywords: ["fullstack", "developer", "aytos", "sofia", "bulgaria", "web development"],
   }),
   metadataBase: new URL("https://slavidimitrov.com"),
 };

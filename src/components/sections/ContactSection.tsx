@@ -1,8 +1,19 @@
 import Section from "@/components/Section";
 import ContactForm from "@/components/ContactForm";
-import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import {
+  DownloadIcon,
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+} from "@/components/icons";
+import { RESUME_FILENAME, RESUME_HREF } from "@/components/ResumeLink";
 
-const CONTACT_LINKS = [
+const CONTACT_LINKS: {
+  label: string;
+  href: string;
+  Icon: typeof MailIcon;
+  download?: string;
+}[] = [
   {
     label: "Email",
     href: "mailto:slavidimitrov54@gmail.com",
@@ -18,6 +29,12 @@ const CONTACT_LINKS = [
     href: "https://github.com/sldimitrov",
     Icon: GithubIcon,
   },
+  {
+    label: "Resume",
+    href: RESUME_HREF,
+    Icon: DownloadIcon,
+    download: RESUME_FILENAME,
+  },
 ];
 
 export default function ContactSection() {
@@ -31,12 +48,13 @@ export default function ContactSection() {
             regularly.
           </p>
           <div className="flex flex-wrap gap-8 animate-stagger">
-            {CONTACT_LINKS.map(({ label, href, Icon }) => {
+            {CONTACT_LINKS.map(({ label, href, Icon, download }) => {
               const isExternal = href.startsWith("http");
               return (
                 <a
                   key={label}
                   href={href}
+                  download={download}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                   className="group flex flex-col items-center gap-3 animate-hover-scale"
