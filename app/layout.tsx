@@ -46,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="flex min-h-full flex-col bg-white text-black dark:bg-black dark:text-white">
+      <body className="flex min-h-full flex-col bg-white text-body">
         <ScrollToTop />
         <Header />
         <div className="flex flex-1 flex-col">{children}</div>

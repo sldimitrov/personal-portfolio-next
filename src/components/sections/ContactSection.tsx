@@ -40,14 +40,13 @@ const CONTACT_LINKS: {
 export default function ContactSection() {
   return (
     <Section id="contact" eyebrow="Get in touch" title="Let's connect.">
-      <div className="space-y-12">
-        {/* Quick Contact Options */}
-        <div className="space-y-4">
-          <p className="text-zinc-700 dark:text-zinc-300 animate-fade-in">
+      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+        <div className="flex flex-col gap-8">
+          <p className="max-w-md text-lg text-body">
             The fastest way to reach me is email or LinkedIn — I check both
             regularly.
           </p>
-          <div className="flex flex-wrap gap-8 animate-stagger">
+          <div className="flex flex-wrap gap-6">
             {CONTACT_LINKS.map(({ label, href, Icon, download }) => {
               const isExternal = href.startsWith("http");
               return (
@@ -57,12 +56,12 @@ export default function ContactSection() {
                   download={download}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
-                  className="group flex flex-col items-center gap-3 animate-hover-scale"
+                  className="group flex flex-col items-center gap-3"
                 >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-zinc-200 text-black transition-all group-hover:border-black group-hover:bg-black group-hover:text-white dark:border-zinc-800 dark:text-white dark:group-hover:border-white dark:group-hover:bg-white dark:group-hover:text-black">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-line-strong bg-white/70 text-fg shadow-sm backdrop-blur transition-all group-hover:-translate-y-1 group-hover:border-navy-600 group-hover:bg-navy-600 group-hover:text-white group-hover:shadow-lg group-hover:shadow-navy-600/30">
                     <Icon width={24} height={24} />
                   </span>
-                  <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                  <span className="text-sm font-medium text-muted">
                     {label}
                   </span>
                 </a>
@@ -71,11 +70,10 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* Contact Form */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-black dark:text-white">
+        <div className="rounded-2xl border border-line bg-white/80 p-6 shadow-sm backdrop-blur sm:p-8">
+          <h3 className="mb-5 text-lg font-semibold text-fg">
             Or send me a message
-          </h2>
+          </h3>
           <ContactForm />
         </div>
       </div>

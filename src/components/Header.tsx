@@ -4,17 +4,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
+// Only the essentials live in the nav; every other section is reachable by scrolling.
 const NAV_LINKS = [
-  { href: "/#home", label: "Home", section: "home" },
-  { href: "/#about", label: "About", section: "about" },
-  { href: "/#experience", label: "Experience", section: "experience" },
-  { href: "/#skills", label: "Skills", section: "skills" },
-  { href: "/#projects", label: "Projects", section: "projects" },
-  { href: "/blog", label: "Blog", section: "blog" },
-  { href: "/#contact", label: "Contact", section: "contact" },
+  { href: "/#about", label: "About", sections: ["about", "experience", "skills"] },
+  { href: "/#projects", label: "Projects", sections: ["projects"] },
+  { href: "/blog", label: "Blog", sections: ["blog"] },
 ];
 
-const SECTION_IDS = NAV_LINKS.flatMap(({ section }) => (section ? [section] : []));
+const CONTACT_LINK = { href: "/#contact", label: "Contact" };
+
+const SECTION_IDS = [
+  "home",
+  "about",
+  "experience",
+  "skills",
+  "projects",
+  "blog",
+  "contact",
+];
 
 export default function Header() {
   const pathname = usePathname();
@@ -23,7 +30,7 @@ export default function Header() {
 
   // Hash links follow the scroll-spy on "/"; page links (Blog) also match their own route
   const isLinkActive = (link: (typeof NAV_LINKS)[number]) =>
-    (pathname === "/" && activeSection === link.section) ||
+    (pathname === "/" && link.sections.includes(activeSection)) ||
     (!link.href.includes("#") && pathname.startsWith(link.href));
 
   // Scroll-spy: highlight the section crossing a line ~40% down the viewport
@@ -49,12 +56,7 @@ export default function Header() {
 
   // Lock/unlock scroll when menu opens/closes
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -62,17 +64,23 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-zinc-800 dark:bg-black/80">
+      <header className="sticky top-0 z-50 border-b border-line bg-white/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
           <Link
             href="/#home"
-            className="text-lg font-semibold tracking-tight text-black dark:text-white"
+            className="flex items-center gap-3 text-base font-semibold tracking-tight text-fg"
             onClick={() => setIsOpen(false)}
           >
+            <span
+              aria-hidden="true"
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-navy-600 to-navy-400 text-xs font-bold text-white shadow-sm"
+            >
+              SD
+            </span>
             Slavi Dimitrov
           </Link>
 
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((link) => {
               const isActive = isLinkActive(link);
               return (
@@ -80,16 +88,28 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
-                  className={`text-sm transition-colors hover-underline ${
+                  className={`relative text-sm transition-colors ${
                     isActive
-                      ? "font-medium text-black dark:text-white"
-                      : "text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white"
+                      ? "font-medium text-fg"
+                      : "text-muted hover:text-fg"
                   }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-1.5 left-0 h-0.5 w-full rounded-full bg-accent"
+                    />
+                  )}
                 </Link>
               );
             })}
+            <Link
+              href={CONTACT_LINK.href}
+              className="btn btn-primary !px-5 !py-2"
+            >
+              {CONTACT_LINK.label}
+            </Link>
           </nav>
 
           <button
@@ -97,7 +117,7 @@ export default function Header() {
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
             onClick={() => setIsOpen((open) => !open)}
-            className="flex h-9 w-9 shrink-0 items-center justify-center text-black md:hidden dark:text-white"
+            className="flex h-9 w-9 shrink-0 items-center justify-center text-fg md:hidden"
           >
             <svg
               width="20"
@@ -123,13 +143,13 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 top-16 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+            className="fixed inset-0 top-16 z-40 bg-navy-950/50 backdrop-blur-sm md:hidden"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
           />
 
           {/* Menu */}
-          <nav className="fixed top-16 left-0 right-0 bottom-0 z-50 flex flex-col gap-1 border-b border-zinc-200 bg-white overflow-y-auto md:hidden dark:border-zinc-800 dark:bg-black">
+          <nav className="fixed top-16 left-0 right-0 bottom-0 z-50 flex flex-col gap-1 overflow-y-auto border-b border-line bg-white px-6 py-4 md:hidden">
             {NAV_LINKS.map((link) => {
               const isActive = isLinkActive(link);
               return (
@@ -138,16 +158,23 @@ export default function Header() {
                   href={link.href}
                   aria-current={isActive ? "true" : undefined}
                   onClick={() => setIsOpen(false)}
-                  className={`px-6 py-3 text-sm transition-colors ${
+                  className={`rounded-lg px-3 py-3 text-base transition-colors ${
                     isActive
-                      ? "font-medium text-black bg-zinc-50 dark:text-white dark:bg-zinc-900"
-                      : "text-zinc-600 hover:text-black hover:bg-zinc-50 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-900"
+                      ? "bg-navy-50 font-medium text-fg"
+                      : "text-muted hover:bg-navy-50 hover:text-fg"
                   }`}
                 >
                   {link.label}
                 </Link>
               );
             })}
+            <Link
+              href={CONTACT_LINK.href}
+              onClick={() => setIsOpen(false)}
+              className="btn btn-primary mt-4"
+            >
+              {CONTACT_LINK.label}
+            </Link>
           </nav>
         </>
       )}

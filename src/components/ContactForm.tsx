@@ -121,7 +121,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-all hover:scale-105 disabled:scale-100 disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+        className="btn btn-primary w-full disabled:opacity-50 disabled:hover:translate-y-0"
       >
         {isSubmitting ? "Sending..." : "Send Message"}
       </button>
@@ -140,7 +140,7 @@ export default function ContactForm() {
               clipRule="evenodd"
             />
           </svg>
-          Message sent! I'll get back to you soon.
+          Message sent! I&apos;ll get back to you soon.
         </div>
       )}
 

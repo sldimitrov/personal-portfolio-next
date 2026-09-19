@@ -10,7 +10,7 @@ import { getBreadcrumbSchema } from "@/lib/schema";
 
 type Params = Promise<{ slug: string }>;
 
-const STACK_VARIANTS = ["blue", "purple", "green", "orange", "default"] as const;
+const STACK_VARIANTS = ["default", "accent"] as const;
 
 export function generateStaticParams() {
   return PROJECTS.filter((project) => project.caseStudy).map((project) => ({
@@ -40,7 +40,7 @@ export async function generateMetadata({
 
 function CaseStudyHeading({ children }: { children: string }) {
   return (
-    <h2 className="text-xl font-semibold tracking-tight text-black dark:text-white">
+    <h2 className="text-xl font-semibold tracking-tight text-fg">
       {children}
     </h2>
   );
@@ -78,28 +78,28 @@ export default async function ProjectCaseStudyPage({
         <div className="flex flex-col gap-6">
           <Link
             href="/#projects"
-            className="inline-flex w-fit items-center gap-2 rounded-lg px-4 py-2 font-medium text-zinc-600 transition-all hover:bg-zinc-100 hover:text-black dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-white"
+            className="btn btn-ghost w-fit !px-0"
           >
             <span>←</span>
             <span>Back to projects</span>
           </Link>
 
-          <p className="text-lg text-zinc-700 dark:text-zinc-300">
+          <p className="text-lg text-body">
             {project.description}
           </p>
 
           <dl className="grid gap-4 sm:grid-cols-2">
             <div>
-              <dt className="text-sm text-zinc-500 dark:text-zinc-400">Role</dt>
-              <dd className="font-medium text-black dark:text-white">
+              <dt className="text-sm text-muted">Role</dt>
+              <dd className="font-medium text-fg">
                 {caseStudy.role}
               </dd>
             </div>
             <div>
-              <dt className="text-sm text-zinc-500 dark:text-zinc-400">
+              <dt className="text-sm text-muted">
                 Timeline
               </dt>
-              <dd className="font-medium text-black dark:text-white">
+              <dd className="font-medium text-fg">
                 {caseStudy.timeline}
               </dd>
             </div>
@@ -111,7 +111,7 @@ export default async function ProjectCaseStudyPage({
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2 font-medium text-white transition-opacity hover:opacity-80 dark:bg-white dark:text-black"
+                className="btn btn-primary"
               >
                 <span>Live demo</span>
                 <span>↗</span>
@@ -122,7 +122,7 @@ export default async function ProjectCaseStudyPage({
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 font-medium text-black transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900"
+                className="btn btn-outline"
               >
                 <span>Source code</span>
                 <span>→</span>
@@ -133,7 +133,7 @@ export default async function ProjectCaseStudyPage({
 
         <section className="flex flex-col gap-4">
           <CaseStudyHeading>The problem</CaseStudyHeading>
-          <p className="text-zinc-700 dark:text-zinc-300">
+          <p className="text-body">
             {caseStudy.problem}
           </p>
         </section>
@@ -141,7 +141,7 @@ export default async function ProjectCaseStudyPage({
         <section className="flex flex-col gap-4">
           <CaseStudyHeading>The solution</CaseStudyHeading>
           {caseStudy.solution.map((paragraph) => (
-            <p key={paragraph} className="text-zinc-700 dark:text-zinc-300">
+            <p key={paragraph} className="text-body">
               {paragraph}
             </p>
           ))}
@@ -152,7 +152,7 @@ export default async function ProjectCaseStudyPage({
           <div className="flex flex-col gap-5">
             {caseStudy.techStack.map((group, index) => (
               <div key={group.category} className="flex flex-col gap-2">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-muted">
                   {group.category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -172,10 +172,10 @@ export default async function ProjectCaseStudyPage({
 
         <section className="flex flex-col gap-4">
           <CaseStudyHeading>Impact</CaseStudyHeading>
-          <ul className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-300">
+          <ul className="flex flex-col gap-3 text-body">
             {caseStudy.impact.map((item) => (
               <li key={item} className="flex gap-3">
-                <span aria-hidden="true" className="text-green-600 dark:text-green-400">
+                <span aria-hidden="true" className="text-aqua-400">
                   ✓
                 </span>
                 <span>{item}</span>
@@ -189,16 +189,16 @@ export default async function ProjectCaseStudyPage({
           {caseStudy.codeHighlights.map((highlight) => (
             <Card key={highlight.title} className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <h3 className="font-semibold text-black dark:text-white">
+                <h3 className="font-semibold text-fg">
                   {highlight.title}
                 </h3>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-muted">
                   {highlight.description}
                 </p>
               </div>
               <pre
                 tabIndex={0}
-                className="overflow-x-auto rounded-lg bg-zinc-950 p-4 text-sm leading-relaxed text-zinc-100 dark:bg-zinc-900"
+                className="overflow-x-auto rounded-lg bg-navy-950 p-4 text-sm leading-relaxed text-navy-100"
               >
                 <code className={`language-${highlight.language} font-mono`}>
                   {highlight.code}
@@ -210,10 +210,10 @@ export default async function ProjectCaseStudyPage({
 
         <section className="flex flex-col gap-4">
           <CaseStudyHeading>Key learnings</CaseStudyHeading>
-          <ul className="flex flex-col gap-3 text-zinc-700 dark:text-zinc-300">
+          <ul className="flex flex-col gap-3 text-body">
             {caseStudy.learnings.map((item) => (
               <li key={item} className="flex gap-3">
-                <span aria-hidden="true" className="text-blue-600 dark:text-blue-400">
+                <span aria-hidden="true" className="text-navy-600">
                   →
                 </span>
                 <span>{item}</span>

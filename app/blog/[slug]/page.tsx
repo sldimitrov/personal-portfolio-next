@@ -36,13 +36,13 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     <PageSection eyebrow="Writing" title={post.title}>
       <Link
         href="/blog"
-        className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-lg font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-all hover:text-black dark:hover:text-white"
+        className="btn btn-ghost mb-6 w-fit !px-0"
       >
         <span>←</span>
         <span>Back to blog</span>
       </Link>
       {post.date && (
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-muted">
           {new Date(post.date).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -50,7 +50,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           })}
         </p>
       )}
-      <div className="prose prose-invert max-w-none text-zinc-700 dark:text-zinc-300">
+      <div className="prose prose-invert max-w-none text-body">
         <p>{post.content}</p>
       </div>
     </PageSection>

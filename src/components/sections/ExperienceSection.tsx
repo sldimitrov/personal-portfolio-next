@@ -40,69 +40,55 @@ const EDUCATION = [
   },
 ];
 
+function ColumnHeading({ children }: { children: string }) {
+  return (
+    <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
+      {children}
+    </h3>
+  );
+}
+
 export default function ExperienceSection() {
   return (
-    <Section id="experience" eyebrow="Career" title="Experience">
+    <Section id="experience" eyebrow="Career" title="Experience" flip>
       <div className="flex flex-col gap-12">
-        <div className="flex flex-col gap-6">
-          <h3 className="text-lg font-semibold text-black dark:text-white">
-            Work
-          </h3>
-          <div className="flex flex-col gap-4 animate-stagger">
+        <div className="grid gap-12 md:grid-cols-2 md:gap-10">
+          <div className="flex flex-col gap-5">
+            <ColumnHeading>Work</ColumnHeading>
             {WORK.map((job) => (
               <Card key={job.company} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
-                  <p className="font-medium text-black dark:text-white">
-                    {job.role}
-                  </p>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="font-semibold text-fg">{job.role}</p>
+                  <p className="text-sm font-medium text-accent">
                     {job.company} · {job.type}
                   </p>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    {job.period}
-                  </p>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    {job.location}
-                  </p>
+                  <p className="text-sm text-muted">{job.period}</p>
+                  <p className="text-sm text-muted">{job.location}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {job.skills.map((skill) => (
-                    <Badge key={skill} variant="purple">
-                      {skill}
-                    </Badge>
+                    <Badge key={skill}>{skill}</Badge>
                   ))}
-                  <Badge variant="purple">+{job.extraSkills} skills</Badge>
+                  <Badge variant="accent">+{job.extraSkills} skills</Badge>
                 </div>
               </Card>
             ))}
           </div>
-        </div>
 
-        <div className="flex flex-col gap-6">
-          <h3 className="text-lg font-semibold text-black dark:text-white">
-            Education
-          </h3>
-          <div className="flex flex-col gap-4 animate-stagger">
+          <div className="flex flex-col gap-5">
+            <ColumnHeading>Education</ColumnHeading>
             {EDUCATION.map((edu) => (
               <Card key={edu.school} className="flex flex-col gap-1">
-                <p className="font-medium text-black dark:text-white">
-                  {edu.school}
-                </p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {edu.degree}
-                </p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {edu.period}
-                </p>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                  {edu.detail}
-                </p>
+                <p className="font-semibold text-fg">{edu.school}</p>
+                <p className="text-sm font-medium text-accent">{edu.degree}</p>
+                <p className="text-sm text-muted">{edu.period}</p>
+                <p className="text-sm text-muted">{edu.detail}</p>
               </Card>
             ))}
           </div>
         </div>
 
-        <ResumeLink className="inline-flex w-fit items-center gap-2 rounded-lg border border-zinc-300 px-4 py-2 font-medium text-black transition-colors hover:bg-white dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900">
+        <ResumeLink className="btn btn-outline w-fit">
           Download full CV (PDF)
         </ResumeLink>
       </div>
