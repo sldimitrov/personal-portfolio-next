@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getSortedPosts } from "@/data/posts";
+import { getSortedPosts } from "@/lib/supabase";
 import { PROJECTS } from "@/data/projects";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -21,11 +21,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogPosts = getSortedPosts().map((post) => ({
+  // A failing posts API should degrade to a sitemap without posts rather than
+  // break the whole route.
+  const posts = await getSortedPosts().catch(() => []);
+
+  const blogPosts = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    changeFrequency: "never" as const,
+    changeFrequency: "monthly" as const,
     priority: 0.6,
-    lastModified: new Date(post.date),
+    lastModified: post.date ? new Date(post.date) : new Date(),
   }));
 
   const caseStudies = PROJECTS.filter((project) => project.caseStudy).map(

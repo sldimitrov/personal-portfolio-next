@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageSection from "@/components/PageSection";
+import { generateMetadata as buildMetadata } from "@/lib/metadata";
 import { getPostBySlug } from "@/lib/supabase";
 
 type Params = Promise<{ slug: string }>;
@@ -18,10 +19,15 @@ export async function generateMetadata({
     return { title: "Post not found" };
   }
 
-  return {
-    title: `${post.title} - Slavi Dimitrov`,
+  // Without an explicit slug these pages inherit the root layout's canonical,
+  // which declares every post a duplicate of the homepage.
+  return buildMetadata({
+    title: post.title,
     description: post.excerpt || post.content.substring(0, 160),
-  };
+    slug: `blog/${slug}`,
+    type: "article",
+    publishedDate: post.date,
+  });
 }
 
 export default async function BlogPostPage({ params }: { params: Params }) {

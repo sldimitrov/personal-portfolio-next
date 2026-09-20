@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
+import { SITE_NAME, absoluteUrl } from "@/lib/site";
 
 interface PageMetadataProps {
   title: string;
