@@ -3,7 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Heading } from "@/lib/markdown";
 
-/** Tracks whichever heading currently sits nearest the top of the viewport. */
+/** Offset for the sticky header, so a heading counts as "reached" at the top. */
+const ACTIVE_OFFSET = 112;
+
+/** Tracks whichever heading the reader has most recently scrolled past. */
 function useActiveHeading(headings: Heading[]) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const ids = useMemo(() => headings.map((h) => h.id).join(","), [headings]);
@@ -18,26 +21,37 @@ function useActiveHeading(headings: Heading[]) {
 
     if (elements.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
-          );
+    function update() {
+      const last = elements[elements.length - 1];
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
 
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      // Only count headings once they reach the top third of the screen, so the
-      // highlight tracks what is actually being read.
-      { rootMargin: "-88px 0px -68% 0px", threshold: 0 }
-    );
+      // The final section is often too short to clear the offset line, so the
+      // bottom of the page always belongs to the last heading.
+      if (atBottom) {
+        setActiveId(last.id);
+        return;
+      }
 
-    elements.forEach((element) => observer.observe(element));
+      let current = elements[0].id;
 
-    return () => observer.disconnect();
+      for (const element of elements) {
+        if (element.getBoundingClientRect().top > ACTIVE_OFFSET) break;
+        current = element.id;
+      }
+
+      setActiveId(current);
+    }
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, [ids]);
 
   return activeId;

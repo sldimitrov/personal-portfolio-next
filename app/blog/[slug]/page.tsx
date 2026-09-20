@@ -11,6 +11,10 @@ import { getPostBySlug, getSortedPosts } from "@/lib/supabase";
 
 type Params = Promise<{ slug: string }>;
 
+// Prerender each post and refresh it in the background, so edits in Supabase
+// reach the site without a redeploy.
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   try {
     const posts = await getSortedPosts();
