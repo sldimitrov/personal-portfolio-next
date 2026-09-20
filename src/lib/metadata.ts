@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "@/lib/site";
 
 interface PageMetadataProps {
   title: string;
@@ -15,14 +16,13 @@ export function generateMetadata(props: PageMetadataProps): Metadata {
     title,
     description,
     slug = "",
-    image = "/og-image.png",
+    image,
     keywords = [],
     type = "website",
     publishedDate,
   } = props;
 
-  const baseUrl = "https://slavidimitrov.com";
-  const url = slug ? `${baseUrl}/${slug}` : baseUrl;
+  const url = absoluteUrl(slug);
 
   return {
     title: slug ? `${title} | Slavi Dimitrov` : title,
@@ -44,22 +44,17 @@ export function generateMetadata(props: PageMetadataProps): Metadata {
       title: slug ? `${title} | Slavi Dimitrov` : title,
       description,
       url,
-      siteName: "Slavi Dimitrov - Fullstack Developer",
+      siteName: SITE_NAME,
       type,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      ...(image && {
+        images: [{ url: image, width: 1200, height: 630, alt: title }],
+      }),
     },
     twitter: {
       card: "summary_large_image",
       title: slug ? `${title} | Slavi Dimitrov` : title,
       description,
-      images: [image],
+      ...(image && { images: [image] }),
       creator: "@slavidimitrov",
     },
     robots: {

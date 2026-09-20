@@ -1,15 +1,19 @@
+import { AUTHOR, SITE_URL, absoluteUrl } from "@/lib/site";
+
 export function getPersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Slavi Dimitrov",
-    url: "https://slavidimitrov.com",
+    url: SITE_URL,
     jobTitle: "Fullstack Developer",
     email: "slavidimitrov54@gmail.com",
-    image: "https://slavidimitrov.com/images/IMG_8449.PNG",
-    location: {
+    image: absoluteUrl("images/IMG_8449.PNG"),
+    description:
+      "Fullstack developer with a frontend foundation in React and Vue and backend expertise in Django and PostgreSQL. Currently at Waracle.",
+    homeLocation: {
       "@type": "Place",
-      name: "Aytos, Bulgaria",
+      name: AUTHOR.location,
     },
     sameAs: [
       "https://github.com/sldimitrov",
@@ -21,7 +25,7 @@ export function getPersonSchema() {
       url: "https://www.waracle.com",
     },
     knowsLanguage: ["en", "bg", "es"],
-    skills: [
+    knowsAbout: [
       "React",
       "Vue.js",
       "Django",
@@ -56,7 +60,7 @@ export function getBreadcrumbSchema(
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: `https://slavidimitrov.com${item.url}`,
+      item: absoluteUrl(item.url),
     })),
   };
 }
@@ -76,12 +80,12 @@ export function getBlogPostSchema(post: {
     author: {
       "@type": "Person",
       name: "Slavi Dimitrov",
-      url: "https://slavidimitrov.com",
+      url: SITE_URL,
     },
-    url: `https://slavidimitrov.com/blog/${post.slug}`,
+    url: absoluteUrl(`blog/${post.slug}`),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://slavidimitrov.com/blog/${post.slug}`,
+      "@id": absoluteUrl(`blog/${post.slug}`),
     },
   };
 }
