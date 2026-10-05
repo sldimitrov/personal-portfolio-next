@@ -23,6 +23,9 @@ async function fetchPosts(): Promise<Post[]> {
       Authorization: `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
+    // Posts change rarely, so serve them from the cache and refresh in the
+    // background instead of hitting Supabase on every page view.
+    next: { revalidate: 300 },
   });
 
   if (!response.ok) {
