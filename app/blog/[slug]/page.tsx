@@ -38,6 +38,8 @@ export async function generateMetadata({
     return { title: "Post not found" };
   }
 
+  // Without an explicit slug these pages inherit the root layout's canonical,
+  // which declares every post a duplicate of the homepage.
   return buildMetadata({
     title: post.title,
     description: post.excerpt || post.content.slice(0, 160),

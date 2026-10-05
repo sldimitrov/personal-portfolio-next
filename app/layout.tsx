@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { getPersonSchema } from "@/lib/schema";
 import { generateMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
       "Fullstack developer specializing in React, Vue, Django, and PostgreSQL. Building production systems at Waracle.",
     keywords: ["fullstack", "developer", "aytos", "sofia", "bulgaria", "web development"],
   }),
-  metadataBase: new URL("https://slavidimitrov.com"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
