@@ -22,6 +22,10 @@
   --color-aqua-300: #8fe0e6;
   --color-aqua-200: #bdeff2;
   --color-aqua-100: #e3f8f9;
+
+  /* Logo colours - used sparingly, for brand moments like the 404 page */
+  --color-brand-green: #00ff8c;
+  --color-brand-yellow: #ffed00;
 }
 
 /* Semantic tokens. Sections switch palette by adding `.tone-blue`. */
@@ -146,6 +150,34 @@ body {
 .text-outline {
   color: transparent;
   -webkit-text-stroke: 1.5px var(--outline-color, var(--color-navy-200));
+}
+
+.text-brand-gradient {
+  background: linear-gradient(
+    120deg,
+    var(--color-brand-green) 0%,
+    var(--color-aqua-300) 55%,
+    var(--color-brand-yellow) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--tilt, 0deg));
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 @layer components {
