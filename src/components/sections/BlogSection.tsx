@@ -19,7 +19,7 @@ export default async function BlogSection() {
   const posts = await getLatestPosts();
 
   return (
-    <Section id="blog" eyebrow="Writing" title="Latest from the blog" tone="blue">
+    <Section id="blog" eyebrow="Writing" title="Latest from the blog" flip>
       <div className="flex flex-col gap-10">
         {posts.length > 0 ? (
           <div className="grid gap-5 md:grid-cols-3">

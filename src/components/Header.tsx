@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -8,6 +9,7 @@ import { useState, useEffect } from "react";
 const NAV_LINKS = [
   { href: "/#about", label: "About", sections: ["about", "experience", "skills"] },
   { href: "/#projects", label: "Projects", sections: ["projects"] },
+  { href: "/#courses", label: "Courses", sections: ["courses"] },
   { href: "/blog", label: "Blog", sections: ["blog"] },
 ];
 
@@ -19,6 +21,7 @@ const SECTION_IDS = [
   "experience",
   "skills",
   "projects",
+  "courses",
   "blog",
   "contact",
 ];
@@ -71,12 +74,14 @@ export default function Header() {
             className="flex items-center gap-3 text-base font-semibold tracking-tight text-fg"
             onClick={() => setIsOpen(false)}
           >
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-navy-600 to-navy-400 text-xs font-bold text-white shadow-sm"
-            >
-              SD
-            </span>
+            <Image
+              src="/images/logo.png"
+              alt=""
+              width={32}
+              height={32}
+              loading="eager"
+              className="h-8 w-8"
+            />
             Slavi Dimitrov
           </Link>
 
