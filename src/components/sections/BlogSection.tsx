@@ -1,22 +1,12 @@
 import Link from "next/link";
 import Section from "@/components/Section";
 import Card from "@/components/Card";
-import { getSortedPosts, type Post } from "@/lib/supabase";
+import { getSortedPosts } from "@/lib/posts";
 
 const LATEST_POSTS_COUNT = 3;
 
-// A failing posts API must not take the whole home page down with it.
-async function getLatestPosts(): Promise<Post[]> {
-  try {
-    const posts = await getSortedPosts();
-    return posts.slice(0, LATEST_POSTS_COUNT);
-  } catch {
-    return [];
-  }
-}
-
 export default async function BlogSection() {
-  const posts = await getLatestPosts();
+  const posts = (await getSortedPosts()).slice(0, LATEST_POSTS_COUNT);
 
   return (
     <Section id="blog" eyebrow="Writing" title="Latest from the blog" flip>

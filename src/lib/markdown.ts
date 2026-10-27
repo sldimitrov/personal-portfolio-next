@@ -28,7 +28,7 @@ function* linesOutsideCodeFences(content: string) {
 }
 
 /** Strips the inline markdown (`code`, **bold**, [links](/x)) out of a heading. */
-function toPlainText(markdown: string) {
+export function toPlainText(markdown: string) {
   return markdown
     .replace(/`([^`]+)`/g, "$1")
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
