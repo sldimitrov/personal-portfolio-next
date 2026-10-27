@@ -39,3 +39,11 @@ export function DownloadIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function YoutubeIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 20 20" fill="currentColor" {...props}>
+      <path d="M19.58 5.12a2.51 2.51 0 0 0-1.77-1.78C16.25 2.92 10 2.92 10 2.92s-6.25 0-7.81.42A2.51 2.51 0 0 0 .42 5.12C0 6.69 0 10 0 10s0 3.31.42 4.88a2.51 2.51 0 0 0 1.77 1.78c1.56.42 7.81.42 7.81.42s6.25 0 7.81-.42a2.51 2.51 0 0 0 1.77-1.78C20 13.31 20 10 20 10s0-3.31-.42-4.88ZM8 13V7l5.2 3L8 13Z" />
+    </svg>
+  );
+}

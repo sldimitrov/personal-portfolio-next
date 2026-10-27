@@ -1,5 +1,6 @@
+import { COURSES } from "@/data/courses";
 import { PROJECTS } from "@/data/projects";
-import { AUTHOR, SITE_URL, absoluteUrl } from "@/lib/site";
+import { AUTHOR, SITE_URL, YOUTUBE_CHANNEL_URL, absoluteUrl } from "@/lib/site";
 import { getSortedPosts } from "@/lib/supabase";
 
 export const revalidate = 300;
@@ -42,6 +43,14 @@ export async function GET() {
     lines.push("");
   }
 
+  if (COURSES.length > 0) {
+    lines.push("## Courses", "");
+    for (const course of COURSES) {
+      lines.push(`- [${course.title}](${course.playlistUrl}): ${course.description}`);
+    }
+    lines.push("");
+  }
+
   if (posts.length > 0) {
     lines.push("## Articles", "");
     for (const post of posts) {
@@ -60,6 +69,7 @@ export async function GET() {
     `- Email: ${AUTHOR.email}`,
     "- GitHub: https://github.com/sldimitrov",
     "- LinkedIn: https://linkedin.com/in/slavi-dimitrov-311982292/",
+    `- YouTube: ${YOUTUBE_CHANNEL_URL}`,
     ""
   );
 

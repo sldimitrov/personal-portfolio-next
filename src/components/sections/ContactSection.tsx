@@ -5,7 +5,9 @@ import {
   GithubIcon,
   LinkedinIcon,
   MailIcon,
+  YoutubeIcon,
 } from "@/components/icons";
+import { YOUTUBE_CHANNEL_URL } from "@/lib/site";
 import { RESUME_FILENAME, RESUME_HREF } from "@/components/ResumeLink";
 
 const CONTACT_LINKS: {
@@ -28,6 +30,11 @@ const CONTACT_LINKS: {
     label: "GitHub",
     href: "https://github.com/sldimitrov",
     Icon: GithubIcon,
+  },
+  {
+    label: "YouTube",
+    href: YOUTUBE_CHANNEL_URL,
+    Icon: YoutubeIcon,
   },
   {
     label: "Resume",

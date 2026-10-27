@@ -1,4 +1,4 @@
-import { AUTHOR, SITE_URL, absoluteUrl } from "@/lib/site";
+import { AUTHOR, SITE_URL, YOUTUBE_CHANNEL_URL, absoluteUrl } from "@/lib/site";
 
 export function getPersonSchema() {
   return {
@@ -18,6 +18,7 @@ export function getPersonSchema() {
     sameAs: [
       "https://github.com/sldimitrov",
       "https://linkedin.com/in/slavi-dimitrov-311982292/",
+      YOUTUBE_CHANNEL_URL,
     ],
     worksFor: {
       "@type": "Organization",
@@ -86,6 +87,39 @@ export function getBlogPostSchema(post: {
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": absoluteUrl(`blog/${post.slug}`),
+    },
+  };
+}
+
+export function getCourseSchema(course: {
+  title: string;
+  description: string;
+  playlistUrl: string;
+  featuredVideoId: string;
+  featuredVideoTitle: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.description,
+    url: course.playlistUrl,
+    isAccessibleForFree: true,
+    provider: {
+      "@type": "Person",
+      name: "Slavi Dimitrov",
+      url: SITE_URL,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+    },
+    video: {
+      "@type": "VideoObject",
+      name: course.featuredVideoTitle,
+      description: course.description,
+      thumbnailUrl: `https://i.ytimg.com/vi/${course.featuredVideoId}/hqdefault.jpg`,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${course.featuredVideoId}`,
     },
   };
 }

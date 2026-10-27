@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/icons";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  YoutubeIcon,
+} from "@/components/icons";
+import { YOUTUBE_CHANNEL_URL } from "@/lib/site";
 
 const SOCIAL_LINKS = [
   { href: "https://github.com/sldimitrov", label: "GitHub", Icon: GithubIcon },
@@ -8,6 +14,7 @@ const SOCIAL_LINKS = [
     label: "LinkedIn",
     Icon: LinkedinIcon,
   },
+  { href: YOUTUBE_CHANNEL_URL, label: "YouTube", Icon: YoutubeIcon },
   {
     href: "mailto:slavidimitrov54@gmail.com",
     label: "Email",
@@ -18,6 +25,7 @@ const SOCIAL_LINKS = [
 const FOOTER_LINKS = [
   { href: "/#about", label: "About" },
   { href: "/#projects", label: "Projects" },
+  { href: "/#courses", label: "Courses" },
   { href: "/blog", label: "Blog" },
   { href: "/#contact", label: "Contact" },
 ];

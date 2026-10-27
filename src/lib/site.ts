@@ -10,6 +10,8 @@ export const SITE_URL = "https://www.slavidimitrov.com";
 
 export const SITE_NAME = "Slavi Dimitrov - Fullstack Developer";
 
+export const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@slavi-dimitrovv";
+
 export const AUTHOR = {
   name: "Slavi Dimitrov",
   jobTitle: "Fullstack Developer",
