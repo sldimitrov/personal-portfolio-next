@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageSection from "@/components/PageSection";
 import Card from "@/components/Card";
-import { getSortedPosts } from "@/lib/supabase";
+import { getSortedPosts } from "@/lib/posts";
 import { generateMetadata } from "@/lib/metadata";
 
 export const metadata = generateMetadata({

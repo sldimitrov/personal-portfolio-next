@@ -42,7 +42,7 @@ This is a personal portfolio website built with Next.js 15+ showcasing Slavi Dim
 
 ### Portfolio Content
 - **Projects** - Stored in `src/data/projects.ts`, displayed on projects page
-- **Blog posts** - Located in `app/blog/`, supports MDX with frontmatter
+- **Blog posts** - Plain markdown files in `content/blog/`, read at build time by `src/lib/posts.ts` (see `content/blog/README.md`)
 - **Experience/Skills** - Stored in `src/data/experience.ts`
 - **Navigation** - Menu links defined in a constants file for easy updates
 
@@ -78,7 +78,7 @@ This is a personal portfolio website built with Next.js 15+ showcasing Slavi Dim
 
 ### Common Tasks
 - **Adding a new project**: Update `src/data/projects.ts`, create project page
-- **New blog post**: Create `.mdx` file in `app/blog/` with frontmatter
+- **New blog post**: Add `content/blog/YYYY-MM-DD-slug.md` starting with `# Title` - no frontmatter required
 - **Styling changes**: Prefer Tailwind utilities over custom CSS
 - **Testing changes**: Verify in both light and dark modes on mobile/desktop
 

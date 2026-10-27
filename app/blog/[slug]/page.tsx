@@ -7,23 +7,17 @@ import MarkdownContent from "@/components/markdown/MarkdownContent";
 import { extractHeadings, readingTime, stripLeadingH1 } from "@/lib/markdown";
 import { generateMetadata as buildMetadata } from "@/lib/metadata";
 import { getBlogPostSchema } from "@/lib/schema";
-import { getPostBySlug, getSortedPosts } from "@/lib/supabase";
+import { getPostBySlug, getSortedPosts } from "@/lib/posts";
 
 type Params = Promise<{ slug: string }>;
 
-// Prerender each post and refresh it in the background, so edits in Supabase
-// reach the site without a redeploy.
-export const revalidate = 300;
+// Posts are markdown files in content/blog/, so every post is known at build
+// time: prerender them all and 404 anything else.
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
-  try {
-    const posts = await getSortedPosts();
-    return posts.map((post) => ({ slug: post.slug }));
-  } catch {
-    // A failing posts API should not fail the build - these pages can still be
-    // rendered on demand.
-    return [];
-  }
+  const posts = await getSortedPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({

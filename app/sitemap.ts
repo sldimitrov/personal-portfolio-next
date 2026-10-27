@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
-import { getSortedPosts } from "@/lib/supabase";
+import { getSortedPosts } from "@/lib/posts";
 import { PROJECTS } from "@/data/projects";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -21,9 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // A failing posts API should degrade to a sitemap without posts rather than
-  // break the whole route.
-  const posts = await getSortedPosts().catch(() => []);
+  const posts = await getSortedPosts();
 
   const blogPosts = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

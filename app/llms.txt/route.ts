@@ -1,9 +1,10 @@
 import { COURSES } from "@/data/courses";
 import { PROJECTS } from "@/data/projects";
 import { AUTHOR, SITE_URL, YOUTUBE_CHANNEL_URL, absoluteUrl } from "@/lib/site";
-import { getSortedPosts } from "@/lib/supabase";
+import { getSortedPosts } from "@/lib/posts";
 
-export const revalidate = 300;
+// Posts only change on deploy, so build this once instead of on every request.
+export const dynamic = "force-static";
 
 /**
  * llms.txt - a plain-text digest for assistants that read a site directly
@@ -14,7 +15,7 @@ export const revalidate = 300;
  * Convention: https://llmstxt.org
  */
 export async function GET() {
-  const posts = await getSortedPosts().catch(() => []);
+  const posts = await getSortedPosts();
   const caseStudies = PROJECTS.filter((project) => project.caseStudy);
 
   const lines = [
