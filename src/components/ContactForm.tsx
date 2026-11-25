@@ -2,6 +2,14 @@
 
 import { FormEvent, useState } from "react";
 
+const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
+
+// These IDs are meant to be public: EmailJS sends directly from the browser.
+// Next.js inlines them at build time, so each one must be referenced by name.
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,23 +36,34 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+        throw new Error("EmailJS environment variables are missing");
+      }
+
+      const response = await fetch(EMAILJS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          service_id: SERVICE_ID,
+          template_id: TEMPLATE_ID,
+          user_id: PUBLIC_KEY,
+          // Keys match the {{variables}} used in the EmailJS template
+          template_params: formData,
+        }),
       });
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setSubmitStatus("idle"), 3000);
-      } else {
-        setSubmitStatus("error");
-        setTimeout(() => setSubmitStatus("idle"), 3000);
+      if (!response.ok) {
+        // EmailJS explains failures in a plain-text body
+        throw new Error(`EmailJS ${response.status}: ${await response.text()}`);
       }
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitStatus("idle"), 3000);
     } catch (error) {
+      console.error("Contact form submission failed:", error);
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 3000);
     } finally {
