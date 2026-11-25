@@ -1,6 +1,15 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { getSendWaitMs, recordSend } from "@/lib/sendLimit";
+
+const EMAILJS_ENDPOINT = "https://api.emailjs.com/api/v1.0/email/send";
+
+// These IDs are meant to be public: EmailJS sends directly from the browser.
+// Next.js inlines them at build time, so each one must be referenced by name.
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,8 +19,15 @@ export default function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
+    "idle" | "success" | "error" | "limited"
   >("idle");
+  const [waitMinutes, setWaitMinutes] = useState(1);
+  const [honeypot, setHoneypot] = useState("");
+  const resetTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const resetStatusLater = () => {
+    resetTimer.current = setTimeout(() => setSubmitStatus("idle"), 3000);
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -25,28 +41,59 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Stop an earlier timer from hiding the next status message
+    clearTimeout(resetTimer.current);
+
+    // People never see this field, so a value means a bot filled it in.
+    // Show success without sending, to give the bot no reason to adapt.
+    if (honeypot) {
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      return;
+    }
+
+    const waitMs = getSendWaitMs();
+    if (waitMs > 0) {
+      setWaitMinutes(Math.ceil(waitMs / 60000));
+      setSubmitStatus("limited");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+        throw new Error("EmailJS environment variables are missing");
+      }
+
+      const response = await fetch(EMAILJS_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          service_id: SERVICE_ID,
+          template_id: TEMPLATE_ID,
+          user_id: PUBLIC_KEY,
+          // Keys match the {{variables}} used in the EmailJS template
+          template_params: formData,
+        }),
       });
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setSubmitStatus("idle"), 3000);
-      } else {
-        setSubmitStatus("error");
-        setTimeout(() => setSubmitStatus("idle"), 3000);
+      if (!response.ok) {
+        // EmailJS explains failures in a plain-text body
+        throw new Error(`EmailJS ${response.status}: ${await response.text()}`);
       }
+
+      // Only delivered messages count, so a failed send can be retried at once
+      recordSend();
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      resetStatusLater();
     } catch (error) {
+      console.error("Contact form submission failed:", error);
       setSubmitStatus("error");
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      resetStatusLater();
     } finally {
       setIsSubmitting(false);
     }
@@ -117,6 +164,20 @@ export default function ContactForm() {
         />
       </div>
 
+      {/* Honeypot: hidden from people and screen readers */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="contact-extra">Leave this field empty</label>
+        <input
+          type="text"
+          id="contact-extra"
+          name="contact-extra"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       {/* Submit Button */}
       <button
         type="submit"
@@ -141,6 +202,18 @@ export default function ContactForm() {
             />
           </svg>
           Message sent! I&apos;ll get back to you soon.
+        </div>
+      )}
+
+      {/* Send Limit Message */}
+      {submitStatus === "limited" && (
+        <div
+          role="status"
+          className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-900/30 dark:bg-amber-950/30 dark:text-amber-300"
+        >
+          Please wait about {waitMinutes}{" "}
+          {waitMinutes === 1 ? "minute" : "minutes"} before sending another
+          message.
         </div>
       )}
 
